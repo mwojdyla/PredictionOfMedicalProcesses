@@ -8,7 +8,9 @@ class Logger(object):
 		formatter = logging.Formatter(
 			fmt='%(asctime)s - %(levelname)s - %(module)s - %(message)s')
 
-		handler = logging.StreamHandler()
+		# handler = logging.StreamHandler()
+		# handler.setFormatter(formatter)
+		handler = logging.FileHandler('Logs/logs.log', mode='w')
 		handler.setFormatter(formatter)
 
 		logger = logging.getLogger(name)
