@@ -48,8 +48,8 @@ class FileParser(object):
 	def _is_valid_date_format(self, date, file):
 		date_pattern = re.compile('\d{2}-\d{2}-\d{4}')
 		if date_pattern.match(date) == None:
-   			logger.warning('{0}: {1} didn\'t match to date pattern'.format(
-   				file, date))
+			logger.warning('{0}: {1} didn\'t match to date pattern'.format(
+				file, date))
 			return False
 
 		return True

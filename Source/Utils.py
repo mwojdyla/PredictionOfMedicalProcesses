@@ -1,14 +1,31 @@
+from os import listdir
+from os.path import dirname, abspath
+
 import logging
 import math
 
 
-directory = 'Diabetes-Data/'
 data_codes = [33, 34, 35, 48, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72]
 
 logger = logging.getLogger('root')
 
 class Utils(object):
 	
+	@classmethod
+	def get_diabetes_data_files(cls):
+		directory = Utils.get_diabetes_data_directory()
+
+		return [directory + file for file in listdir(directory) if 'data' in file]
+
+	@classmethod
+	def get_diabetes_data_directory(cls):
+		dir_name = 'Diabetes-Data'
+		main_dir = dirname(dirname(abspath(__file__)))
+		diabetes_data_dir = \
+			[dir_ for dir_ in listdir(main_dir) if dir_ == dir_name][0]
+		
+		return abspath(diabetes_data_dir) + '/'
+
 	@classmethod
 	def compute_euclidean_distance(cls, vector_x, vector_w):
 		distance = 0.0
