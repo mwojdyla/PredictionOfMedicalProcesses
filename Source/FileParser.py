@@ -1,5 +1,5 @@
 from Utils import data_codes
-from DataStructure import DataStructure, DataSample
+from DataSample import DataSample
 
 import re
 import logging
@@ -15,7 +15,7 @@ class FileParser(object):
 		patients_data = []
 
 		for file in files:
-			data_struct = DataStructure(file)
+			samples = []
 
 			with open(file, 'r') as data_file:
 				for line in data_file.readlines():
@@ -24,8 +24,8 @@ class FileParser(object):
 					if self._is_ignored_line(splitted_line, file):
 						continue
 
-					data_struct.samples.append(DataSample(splitted_line))
-			patients_data.append(data_struct)
+					samples.append(DataSample(splitted_line))
+			patients_data.append(samples)
 
 		return patients_data
 

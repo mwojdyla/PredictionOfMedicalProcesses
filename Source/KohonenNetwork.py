@@ -16,25 +16,29 @@ class KohonenNetwork(object):
 					'{0}. input is type of {1} instead of list'.format(
 						index, type(input_layer[index])))
 
-		self.initial_learning_rate = 0.1
+		self.initial_learning_rate = 10
 		self.iterations_number = iterations
-		self.map_radius = max(rows, columns) // 2
-		self.time_constant = self.iterations_number / math.log(self.map_radius)
+		self.map_radius = max(rows, columns) // 2 # sigma zero
+		# self.time_constant = self.iterations_number / math.log(self.map_radius)# lambda REMOVE 1!!!
+		self.time_constant = 91
+		# print("time_constant= {}".format(self.time_constant))
 		self.neurons_number = rows * columns
 		self.input_layer = input_layer
-		self.computional_layer = None 
+		self.computional_layer = None
 
 	def process_self_organization(self):
 		self._process_initialization()
+		self.show_weights()
 
 		for iteration in range(self.iterations_number):
-			for input_unit in self.input_layer:
-				winner, index = self._process_competition(input_unit)
-				radius, neighbourhood = self._process_cooperation(winner, 
-					iteration)
-				self._process_adaptation(input_unit, winner, neighbourhood,
-					radius, iteration)
-				self.computional_layer.insert(index, winner)
+			random_index = random.randint(0, len(self.input_layer) - 1)
+			input_unit = self.input_layer[random_index]
+			winner, index = self._process_competition(input_unit)
+			radius, neighbourhood = self._process_cooperation(winner,
+				iteration)
+			self._process_adaptation(input_unit, winner, neighbourhood,
+				radius, iteration)
+			self.computional_layer.insert(index, winner)
 
 	def _process_initialization(self):
 		dimension = len(self.input_layer[0])
@@ -91,8 +95,14 @@ class KohonenNetwork(object):
 				influence * learning_rate, vectors_difference)
 			neuron.weights = Utils.calculate_sum(neuron.weights, product)
 
+	def show_weights(self):
+		for node in self.computional_layer:
+			for w in node.weights:
+				str_to_show = "{0:.2f}".format(round(w,2)).ljust(8)
+				print(str_to_show, end=' ')
+			print()
 
-	
+
 class Neuron(object):
 
 	def __init__(self, dimension):

@@ -37,7 +37,7 @@ class Utils(object):
 		for index in range(len(vector_x)):
 			distance = distance + (vector_x[index] - vector_w[index]) ** 2
 
-		return distance
+		return math.sqrt(distance)
 
 	@classmethod
 	def calculate_difference(cls, vector_x, vector_w):
@@ -78,6 +78,6 @@ class Utils(object):
 	def calculate_influence(cls, winner, neuron, radius):
 		distance = Utils.compute_euclidean_distance(winner.weights, neuron.weights)
 		counter = -(distance ** 2)
-		denominator = 2 * radius ** 2
+		denominator = 2 * (radius ** 2)
 
 		return math.exp(counter / denominator)

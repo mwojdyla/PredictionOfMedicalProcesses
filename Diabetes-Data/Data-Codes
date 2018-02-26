@@ -14,7 +14,7 @@ File Names and format:
 (1) Date in MM-DD-YYYY format
 (2) Time in XX:YY format
 (3) Code
-(4) Value
+(4) Value ( glucose level in mg/dL)
 
 The Code field is deciphered as follows:
 

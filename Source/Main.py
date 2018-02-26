@@ -1,6 +1,7 @@
 #Python packages
 
 #Source files
+from DataSample import *
 from Logger import Logger
 from FileParser import FileParser
 from DataManager import DataManager
@@ -17,10 +18,15 @@ files.sort()
 
 data_parser = FileParser()
 patients_data = data_parser.parse(files)
-
 manager = DataManager(patients_data[1])
+averaged_data = manager.get_converted_data()
 
-plotter = Plotter()
-plotter.plot(['04-23-1991', 'Tuesday', 'Wednesday'], [2, 4, 6], 'Time', 'Value')
-network = KohonenNetwork([[1,2,3], [3,2,1], [1,4,1], [5,1,3]], 6, 5, 20)
+
+
+network = KohonenNetwork([[123,221,333,421], [35,50,70,20], [402,412,321,100]] , 3, 3, 100)
 network.process_self_organization()
+print("######################################################")
+network.show_weights()
+
+# plotter = Plotter()
+# plotter.plot(['04-23-1991', 'Tuesday', 'Wednesday'], [2, 4, 6], 'Time', 'Value')
